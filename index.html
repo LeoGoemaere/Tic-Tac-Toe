@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/default.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<main>
+	<h1>Tic Tac Toe</h1>
+		<div class="grid">
+			<button class="box"></button>
+			<button class="box"></button>
+			<button class="box"></button>
+			<button class="box"></button>
+			<button class="box"></button>
+			<button class="box"></button>
+			<button class="box"></button>
+			<button class="box"></button>
+			<button class="box"></button>
+			<span class="horizontal"></span>
+			<span class="horizontal"></span>
+			<span class="vertical"></span>
+			<span class="vertical"></span>
+			<div class="win-overlay">
+				<span></span>
+			</div>
+		</div>	
+
+		<div class="counter">
+			<div class="players">
+				<span class="player x">
+					<span></span>
+				</span>
+				<span class="player o">
+					<span></span>
+				</span>
+				<div class="clear"></div>
+			</div>
+			<span class="score x">0</span>
+			<span class="score o">0</span>
+			<div class="clear"></div>
+		</div>
+		<button class="replay">Rejouer</button>
+	</main>
+	<script text="javascript" src="js/model/grid.js"></script>
+	<script text="javascript" src="js/view/gridView.js"></script>
+	<script text="javascript" src="js/controller/gridController.js"></script>
+	<script text="javascript" src="js/main.js"></script>
+</body>
+</html>

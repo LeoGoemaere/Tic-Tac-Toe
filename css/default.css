@@ -1,0 +1,397 @@
+* {
+	box-sizing: border-box;
+}
+
+@keyframes circleAnimation {
+	0% { 
+		transform: scale(0.4); 
+	}
+	100% { 
+		transform: scale(0.8);
+	}
+}
+
+@keyframes horizontalDrawing {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: 100%;
+	}
+}
+
+@keyframes verticalDrawing {
+	0% {
+		width: 0;
+	}
+	100% {
+		width: 100%;
+	}
+}
+
+@keyframes overlay {
+	0% {
+		transform: translate(-50%, 40%);
+		opacity: 0;
+	}
+	/*50% {
+		transform: translate(-50%, 40%);
+	}*/
+	100% {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+body {
+	font-family: "Arial"
+}
+
+/* Clearfix */
+.clear {
+	display: block;
+	clear: both;
+}
+
+main {
+	text-align: center;
+}
+
+h1 {
+	color: #f3c856;
+	font-size: 40px;
+	margin-bottom: 50px;
+}
+
+.grid {
+	width: 300px;
+	height: 300px;
+	margin: auto;
+	position: relative;
+}
+
+/* win style */
+
+.grid:before {
+	content: "";
+	position: absolute;
+	background: #cb3251;
+	width: 0;
+	height: 0;
+	z-index: 10;
+	border-radius: 20px;
+	transition: width height ease .4s;
+}
+
+.grid.hori:before {
+	width: 100%;
+	height: 15px;
+	left: 0;
+	transform: translateY(-50%);
+	transition: width ease .4s;
+}
+
+.grid.verti:before {
+	height: 100%;
+	width: 15px;
+	transform: translateX(-50%);
+	transition: height ease .4s;
+}
+
+.grid.oblique:before {
+	width: 100%;
+	height: 15px;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	transition: width ease .9s;
+}
+
+.grid.oblique.left:before { transform: rotate(45deg); }
+.grid.oblique.right:before { transform: rotate(-45deg); }
+
+
+.grid.top:before { top: 16.66%; }
+.grid.bottom:before { top: 83.33%; }
+.grid.hori.middle:before { top: 50%; }
+
+.grid.verti.left:before { left: 16.66%; }
+.grid.verti.right:before { left: 83.33%; }
+.grid.verti.middle:before { left: 50%; }
+
+/* win style */
+
+.box {
+	width: 33.33%;
+	height: 33.33%;
+	float: left;
+	overflow: hidden;
+	border: none; 
+	position: relative;
+	cursor: pointer;
+	background: none;
+}
+
+.box:focus { outline:0; }
+
+/* grid draw */
+/*.horizontal,
+.vertical {
+	width: 0;
+	height: 0;
+	transition: all ease 0.4s;
+}*/
+
+.vertical {
+	position: absolute;
+	top: 0;
+	width: 10px;
+	height: 100%;
+	background-color: #f3c856;
+	border-radius: 20px;
+	transform: translateX(-50%);
+	left: 33.33%; /* Third of grid size */
+	animation: horizontalDrawing .4s ease-in-out forwards;
+}
+
+.vertical + .vertical {
+	left: 66.66%; /* Two third of grid size */
+}
+
+.horizontal {
+	position: absolute;
+	top: 33.33%;
+	width: 100%;
+	height: 10px;
+	background-color: #f3c856;
+	border-radius: 20px;
+	transform: translateY(-50%);
+	left: 0;	
+	animation: verticalDrawing .4s ease-in-out forwards;
+}
+
+.horizontal + .horizontal {
+	top: 66.66%; /* Two third of grid size */
+}
+
+.box:before,
+.box:after {
+	content: "";
+	width: 0;
+	transition: width ease;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+}
+
+/* Cross animation */
+.cross:before {
+	width: 100%;
+	height: 15px;
+	background-color: #f3c856;
+	display: block;
+	border-radius: 20px;
+	transform: rotate(45deg);
+	transition-duration: 0.5s;
+}
+
+.cross:after {
+	width: 100%;
+	height: 15px;
+	background-color: #f3c856;
+	display: block;
+	border-radius: 20px;
+	transform: rotate(-45deg);
+	transition-duration: 0.5s;
+	transition-delay: 0.2s;
+}
+
+/* Circle animation */
+.circle:before {
+	width: 100%;
+	height: 100%;
+	border: 15px solid #f3c856;
+	display: block;
+	border-radius: 50%;
+	box-sizing: border-box;
+	/*transform: scale(0.8);*/
+	animation: circleAnimation 0.5s ease-in-out forwards;
+}
+
+/* counter styles */
+.counter {
+	width: 150px;
+	margin: auto;
+	margin-top: 25px;
+	text-align: center;
+	position: relative;
+}
+
+.counter span {
+	display: block;
+	float: left;
+}
+
+.counter:after {
+	content: "";
+	position: absolute;
+	background-color: #f3c856; /*cb3251*/
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.counter:after {
+	width: 5px;
+	left: 0;
+	right: 0;
+	height: 100%;
+	border-radius: 20px;
+	margin: auto;
+}
+
+.players {
+	position: relative;
+	border-bottom: 5px solid #f3c856;
+	cursor: pointer;
+}
+
+.players:before {
+	content: "";
+	width: 50%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	z-index: -1;
+	background-color: #f3c856;
+	transform: translateX(0);
+	transition: transform ease 0.4s;
+}
+
+.players.oTurn:before {
+	transform: translateX(100%);
+	transition: transform ease 0.4s;
+}
+
+.player > span {
+	content: "";
+	width: 20px;
+	height: 20px;
+	display: block;
+	width: 100%;
+	transition: transform ease .4s;
+}
+
+.player.x > span {
+	background: url("../images/red-cross.png") no-repeat center;
+	background-size: contain;
+}
+
+.player.o > span {
+	background: url("../images/red-circle.png") no-repeat center;
+	background-size: contain;
+}
+
+.oTurn .player.o > span {
+	transform: scale(1.3);
+	transition: transform ease .4s;
+}
+
+.xTurn .player.x > span {
+	transform: scale(1.3);
+	transition: transform ease .4s;
+}
+
+.player,
+.score {
+	padding: 10px 0;
+	width: 50%;
+}
+
+.score { color: #f3c856; font-weight: bold; }
+
+/* win overlay */
+.win-overlay {
+	position: absolute;
+	width: 60%;
+	top: 50%;
+	left: 50%;
+	/*transform: translate(-50%, -50%);*/
+	padding: 20px 40px;
+	text-align: center;
+	background-color: #ebeded;
+	border-radius: 2px;
+	opacity: 0;
+	display: none;
+	z-index: 20;
+}
+
+.win-overlay.active {
+	display: block;
+	animation: overlay .4s .4s cubic-bezier(0.18, 0.69, 0.2, 1.2) forwards;
+}
+
+.win-overlay span {
+	display: block;
+}
+
+.win-overlay p {
+	display: inline-block;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #f3c856;
+}
+
+.win-overlay > span:before {
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	padding-right: 10px;
+}
+
+.win-overlay > span:after {
+	content: "gagne !";
+	color: #f3c856;
+}
+
+.win-overlay.xWin > span:before {
+	background: url("../images/cross.png") no-repeat;
+	background-size: contain;
+}
+
+.win-overlay.oWin > span:before {
+	background: url("../images/circle.png") no-repeat;
+	background-size: contain;
+}
+
+.win-overlay.drawGame > span:before {
+	content: none;
+}
+
+.win-overlay.drawGame > span:after {
+	content: "match nul !"
+}
+
+.replay {
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 10px;
+	color: #f3c856;
+	font-size: 15px;
+	margin-top: 20px;
+}
+
+.replay:focus {
+	outline: none;
+}
